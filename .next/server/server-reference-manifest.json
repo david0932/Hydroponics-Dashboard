@@ -1,0 +1,17 @@
+{
+  "node": {
+    "4005ab98c1c69345c59c1af387c267d5b8f8370e99": {
+      "workers": {
+        "app/page": {
+          "moduleId": "[project]/.next-internal/server/app/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/ai/flows/suggest-action-from-sensor-data.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/page": "action-browser"
+      }
+    }
+  },
+  "edge": {},
+  "encryptionKey": "AFs7T4DfgmwM2K5eMksic13Nk/F5SVtzmraP0eNYb6U="
+}
