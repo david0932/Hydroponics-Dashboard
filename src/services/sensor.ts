@@ -18,6 +18,14 @@ export interface SensorData {
    * The water level reading from the sensor (in cm).
    */
   waterLevelCm: number;
+   /**
+   * The EC reading from the sensor.
+   */
+  ec: number;
+  /**
+   * The dissolved oxygen reading from the sensor (in ppm).
+   */
+  dissolvedOxygen: number;
 }
 
 /**
@@ -32,5 +40,7 @@ export async function getSensorData(): Promise<SensorData> {
     humidity: 60.2,
     pH: 6.5,
     waterLevelCm: 15.0,
+    ec: 1.2,
+    dissolvedOxygen: 7.5,
   };
 }
