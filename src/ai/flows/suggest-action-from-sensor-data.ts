@@ -14,6 +14,7 @@ import {SensorData} from '@/services/sensor';
 const SuggestActionFromSensorDataInputSchema = z.object({
   sensorData: z.object({
     temperatureCelsius: z.number().describe('The temperature reading from the sensor (in Celsius).'),
+    waterTemperatureCelsius: z.number().describe('The water temperature reading from the sensor (in Celsius).'),
     humidity: z.number().describe('The humidity reading from the sensor (percentage).'),
     pH: z.number().describe('The pH level reading from the sensor.'),
     waterLevelCm: z.number().describe('The water level reading from the sensor (in cm).'),
@@ -65,6 +66,7 @@ const prompt = ai.definePrompt({
     schema: z.object({
       sensorData: z.object({
         temperatureCelsius: z.number().describe('The temperature reading from the sensor (in Celsius).'),
+        waterTemperatureCelsius: z.number().describe('The water temperature reading from the sensor (in Celsius).'),
         humidity: z.number().describe('The humidity reading from the sensor (percentage).'),
         pH: z.number().describe('The pH level reading from the sensor.'),
         waterLevelCm: z.number().describe('The water level reading from the sensor (in cm).'),
@@ -107,6 +109,7 @@ const prompt = ai.definePrompt({
 
   Here is the current sensor data:
   Temperature: {{{sensorData.temperatureCelsius}}}°C (Range: {{{temperatureRange.min}}} - {{{temperatureRange.max}}}°C)
+  Water Temperature: {{{sensorData.waterTemperatureCelsius}}}°C
   Humidity: {{{sensorData.humidity}}}% (Range: {{{humidityRange.min}}} - {{{humidityRange.max}}}%)
   pH: {{{sensorData.pH}}} (Range: {{{pHRange.min}}} - {{{pHRange.max}}})
   Water Level: {{{sensorData.waterLevelCm}}} cm (Range: {{{waterLevelRange.min}}} - {{{waterLevelRange.max}}} cm)
@@ -131,3 +134,4 @@ const suggestActionFromSensorDataFlow = ai.defineFlow<
   const {output} = await prompt(input);
   return output!;
 });
+

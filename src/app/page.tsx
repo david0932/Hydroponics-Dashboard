@@ -25,25 +25,29 @@ const chartConfig = {
     label: "溫度 (°C)",
     color: "var(--chart-1)",
   },
+  waterTemperature: {
+    label: "水溫 (°C)",
+    color: "var(--chart-2)",
+  },
   humidity: {
     label: "濕度 (%)",
-    color: "var(--chart-2)",
+    color: "var(--chart-3)",
   },
   pH: {
     label: "酸鹼值",
-    color: "var(--chart-3)",
+    color: "var(--chart-4)",
   },
   waterLevel: {
     label: "水位 (cm)",
-    color: "var(--chart-4)",
+    color: "var(--chart-5)",
   },
   ec: {
     label: "電導度 (EC)",
-    color: "var(--chart-5)",
+    color: "var(--chart-1)",
   },
   dissolvedOxygen: {
     label: "溶氧量 (ppm)",
-    color: "var(--chart-1)",
+    color: "var(--chart-2)",
   }
 };
 
@@ -51,6 +55,7 @@ const chartConfig = {
 const dummyHistoricalData = Array.from({length: 20}, (_, i) => ({
   name: `Day ${i + 1}`,
   temperature: 20 + Math.random() * 5,
+  waterTemperature: 18 + Math.random() * 5,
   humidity: 50 + Math.random() * 30,
   pH: 5.5 + Math.random() * 2,
   waterLevel: 10 + Math.random() * 10,
@@ -61,6 +66,7 @@ const dummyHistoricalData = Array.from({length: 20}, (_, i) => ({
 export default function Home() {
   const [sensorData, setSensorData] = useState({
     temperatureCelsius: 0,
+    waterTemperatureCelsius: 0,
     humidity: 0,
     pH: 0,
     waterLevelCm: 0,
@@ -106,6 +112,7 @@ export default function Home() {
     const aiInput = {
       sensorData: {
         temperatureCelsius: sensorData.temperatureCelsius,
+        waterTemperatureCelsius: sensorData.waterTemperatureCelsius,
         humidity: sensorData.humidity,
         pH: sensorData.pH,
         waterLevelCm: sensorData.waterLevelCm,
@@ -135,6 +142,13 @@ export default function Home() {
               <CardDescription>目前溫度 (攝氏度)</CardDescription>
             </CardHeader>
             <CardContent>{sensorData.temperatureCelsius}°C</CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
+              <CardTitle>水溫</CardTitle>
+              <CardDescription>目前水溫 (攝氏度)</CardDescription>
+            </CardHeader>
+            <CardContent>{sensorData.waterTemperatureCelsius}°C</CardContent>
           </Card>
           <Card>
             <CardHeader>
@@ -185,11 +199,12 @@ export default function Home() {
                   <Recharts.Tooltip content={<ChartTooltipContent/>}/>
                   <Recharts.Legend content={<ChartLegendContent/>}/>
                   <Recharts.Line type="monotone" dataKey="temperature" stroke="var(--chart-1)"/>
-                  <Recharts.Line type="monotone" dataKey="humidity" stroke="var(--chart-2)"/>
-                  <Recharts.Line type="monotone" dataKey="pH" stroke="var(--chart-3)"/>
-                  <Recharts.Line type="monotone" dataKey="waterLevel" stroke="var(--chart-4)"/>
-                   <Recharts.Line type="monotone" dataKey="ec" stroke="var(--chart-5)"/>
-                  <Recharts.Line type="monotone" dataKey="dissolvedOxygen" stroke="var(--chart-1)"/>
+                  <Recharts.Line type="monotone" dataKey="waterTemperature" stroke="var(--chart-2)"/>
+                  <Recharts.Line type="monotone" dataKey="humidity" stroke="var(--chart-3)"/>
+                  <Recharts.Line type="monotone" dataKey="pH" stroke="var(--chart-4)"/>
+                   <Recharts.Line type="monotone" dataKey="waterLevel" stroke="var(--chart-5)"/>
+                  <Recharts.Line type="monotone" dataKey="ec" stroke="var(--chart-1)"/>
+                  <Recharts.Line type="monotone" dataKey="dissolvedOxygen" stroke="var(--chart-2)"/>
                 </Recharts.LineChart>
               </ChartContainer>
             </CardContent>
@@ -232,3 +247,4 @@ export default function Home() {
     </div>
   );
 }
+

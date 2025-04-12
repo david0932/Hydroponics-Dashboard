@@ -7,6 +7,10 @@ export interface SensorData {
    */
   temperatureCelsius: number;
   /**
+   * The water temperature reading from the sensor (in Celsius).
+   */
+  waterTemperatureCelsius: number;
+  /**
    * The humidity reading from the sensor (percentage).
    */
   humidity: number;
@@ -37,6 +41,7 @@ export async function getSensorData(): Promise<SensorData> {
   // TODO: Implement this by calling an API.
   return {
     temperatureCelsius: 25.5,
+    waterTemperatureCelsius: 22.3,
     humidity: 60.2,
     pH: 6.5,
     waterLevelCm: 15.0,
@@ -44,3 +49,4 @@ export async function getSensorData(): Promise<SensorData> {
     dissolvedOxygen: 7.5,
   };
 }
+
