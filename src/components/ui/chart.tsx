@@ -1,5 +1,6 @@
 "use client"
 
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "./table";
 import * as React from "react"
 import * as RechartsPrimitive from "recharts"
 
@@ -39,13 +40,15 @@ const ChartContainer = React.forwardRef<
   React.ComponentProps<"div"> & {
     config: ChartConfig
     children: React.ComponentProps<
-      typeof RechartsPrimitive.ResponsiveContainer
-    >["children"]
+    typeof RechartsPrimitive.ResponsiveContainer
+    >["children"];
+    displayAsTable?: boolean
   }
->(({ id, className, children, config, ...props }, ref) => {
+>(({ id, className, children, config, displayAsTable, ...props }, ref) => {
   const uniqueId = React.useId()
   const chartId = `chart-${id || uniqueId.replace(/:/g, "")}`
-
+  const data = children?.props?.data;
+  
   return (
     <ChartContext.Provider value={{ config }}>
       <div
@@ -57,11 +60,45 @@ const ChartContainer = React.forwardRef<
         )}
         {...props}
       >
-        <ChartStyle id={chartId} config={config} />
-        <RechartsPrimitive.ResponsiveContainer>
-          {children}
-        </RechartsPrimitive.ResponsiveContainer>
+        {!displayAsTable ? (
+          <>
+            <ChartStyle id={chartId} config={config} />
+            <RechartsPrimitive.ResponsiveContainer>
+              {children}
+            </RechartsPrimitive.ResponsiveContainer>
+          </>
+        ) : (
+          <Table>
+            <TableHeader>
+              <TableRow>
+                {data && Object.keys(data[0]).map((key) => (
+                  <TableHead key={key}>{key}</TableHead>
+                ))}
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {data?.map((row: any, index: any) => (
+                <TableRow key={index}>
+                  {Object.keys(row).map((key) => (
+                    <TableCell key={key}>
+                      {row[key]}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        )}
       </div>
+
+
+
+
+
+
+
+
+
     </ChartContext.Provider>
   )
 })
