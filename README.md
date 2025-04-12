@@ -17,5 +17,7 @@ HydroView 儀表板是一個用於監控和管理植物生長狀況的應用程�
 - 動作紀錄
 
 主要頁面位於 `src/app/page.tsx`。
-
+# Screenshot
 ![Dashboard Overview](https://github.com/david0932/Hydroponics-Dashboard/blob/master/image/screenshot-1.png)
+![Dashboard Overview](https://github.com/david0932/Hydroponics-Dashboard/blob/master/image/screenshot-2.png)
+![Dashboard Overview](https://github.com/david0932/Hydroponics-Dashboard/blob/master/image/screenshot-3.png)
